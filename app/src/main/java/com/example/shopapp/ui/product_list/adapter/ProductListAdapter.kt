@@ -1,23 +1,22 @@
 package com.example.shopapp.ui.product_list.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil3.load
 import coil3.request.crossfade
 import com.example.shopapp.data.model.ProductDto
 import com.example.shopapp.databinding.ItemProductBinding
 
-class ProductListAdapter(private val onClick: (ProductDto) -> Unit) : RecyclerView.Adapter<ProductListAdapter.ProductListHolder>() {
+class ProductListAdapter(private val onClick: (ProductDto) -> Unit) :
+    ListAdapter<ProductDto, ProductListAdapter.ProductListHolder>(
+        ProductDiffUtilCallback()
+    ) {
 
-    private var items : List<ProductDto> = emptyList()
 
-    fun submitList(list: List<ProductDto>){
-        items = list
-        notifyDataSetChanged()
 
-    }
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -35,22 +34,36 @@ class ProductListAdapter(private val onClick: (ProductDto) -> Unit) : RecyclerVi
         holder: ProductListHolder,
         position: Int
     ) {
-        holder.onBint(items[position])
+        holder.onBint(getItem(position))
     }
 
-    override fun getItemCount(): Int {
-        return  items.size
+
+    class ProductDiffUtilCallback() : DiffUtil.ItemCallback<ProductDto>() {
+        override fun areItemsTheSame(
+            oldItem: ProductDto,
+            newItem: ProductDto
+        ): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(
+            oldItem: ProductDto,
+            newItem: ProductDto
+        ): Boolean {
+            return oldItem == newItem
+        }
+
     }
 
     inner class ProductListHolder(private val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun onBint(product: ProductDto){
-            with(binding){
+        fun onBint(product: ProductDto) {
+            with(binding) {
                 tvTitle.text = product.title
                 tvCategory.text = product.category
                 tvPrice.text = "${product.price} $"
-                ivProduct.load(product.image){
+                ivProduct.load(product.image) {
                     crossfade(true)
                 }
 

@@ -20,8 +20,8 @@
         tools:layout="@layout/fragment_product_details">
 
         <argument
-            android:name="productDto"
-            app:argType="com.example.shopapp.data.model.ProductDto" />
+            android:name="productId"
+            app:argType="integer" />
     </fragment>
 
 

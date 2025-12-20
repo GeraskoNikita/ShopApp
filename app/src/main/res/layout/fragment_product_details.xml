@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:id="@+id/productDetails"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_cancel"
@@ -34,7 +37,7 @@
 
             <!-- Image -->
             <ImageView
-                android:id="@+id/img_product"
+                android:id="@+id/productImage"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:scaleType="fitCenter"
@@ -53,7 +56,7 @@
 
             <!-- Title -->
             <TextView
-                android:id="@+id/tv_title"
+                android:id="@+id/productName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -63,7 +66,7 @@
 
             <!-- Price -->
             <TextView
-                android:id="@+id/tv_price"
+                android:id="@+id/productPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -86,7 +89,7 @@
                     app:tint="#FFC107" />
 
                 <TextView
-                    android:id="@+id/tv_rating"
+                    android:id="@+id/productRating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
@@ -103,7 +106,7 @@
 
             <!-- Description -->
             <TextView
-                android:id="@+id/tv_description"
+                android:id="@+id/productDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Your perfect pack for everyday use..."
@@ -124,4 +127,12 @@
     </LinearLayout>
 
 
-</androidx.core.widget.NestedScrollView>
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+
+
+</FrameLayout>
