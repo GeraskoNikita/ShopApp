@@ -32,8 +32,8 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
     // Создаём ViewModel с productId через фабрику
     private val viewModel: ProductDetailsViewModel by viewModels {
         ProductDetailsViewModelFactory(
-            productId = args.productId,
-            repository = ProductRepository()
+            productId = args.productId
+
         )
     }
 

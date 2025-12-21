@@ -11,9 +11,9 @@ import kotlinx.coroutines.launch
 
 class ProductDetailsViewModel(
     private val productId: Int,
-    private val repository: ProductRepository
-) : ViewModel() {
 
+) : ViewModel() {
+    private val repository= ProductRepository()
     private val _state = MutableStateFlow<UIState<ProductDto>>(UIState.Loading)
     val state: StateFlow<UIState<ProductDto>> = _state
 
