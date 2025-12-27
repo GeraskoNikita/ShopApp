@@ -1,4 +1,4 @@
-package com.example.shopapp.ui.product_list.adapter
+package com.example.shopapp.ui.fragment.product_list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil3.load
 import coil3.request.crossfade
-import com.example.shopapp.data.model.ProductDto
 import com.example.shopapp.databinding.ItemProductBinding
+import com.example.shopapp.domain.models.Product
 
-class ProductListAdapter(private val onClick: (ProductDto) -> Unit) :
-    ListAdapter<ProductDto, ProductListAdapter.ProductListHolder>(
+class ProductListAdapter(private val onClick: (Product) -> Unit) :
+    ListAdapter<Product, ProductListAdapter.ProductListHolder>(
         ProductDiffUtilCallback()
     ) {
 
@@ -38,17 +38,17 @@ class ProductListAdapter(private val onClick: (ProductDto) -> Unit) :
     }
 
 
-    class ProductDiffUtilCallback() : DiffUtil.ItemCallback<ProductDto>() {
+    class ProductDiffUtilCallback() : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(
-            oldItem: ProductDto,
-            newItem: ProductDto
+            oldItem: Product,
+            newItem: Product
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: ProductDto,
-            newItem: ProductDto
+            oldItem: Product,
+            newItem: Product
         ): Boolean {
             return oldItem == newItem
         }
@@ -58,7 +58,7 @@ class ProductListAdapter(private val onClick: (ProductDto) -> Unit) :
     inner class ProductListHolder(private val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun onBint(product: ProductDto) {
+        fun onBint(product: Product) {
             with(binding) {
                 tvTitle.text = product.title
                 tvCategory.text = product.category

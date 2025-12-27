@@ -1,7 +1,9 @@
 package com.example.shopapp.data.api
 
 import com.example.shopapp.data.model.ProductDto
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface StoreAPI {
@@ -10,4 +12,6 @@ interface StoreAPI {
 
     @GET("products/{id}")
     suspend fun getProductById(@Path("id") id: Int): ProductDto
+
+
 }

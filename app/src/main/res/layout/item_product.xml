@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:cardCornerRadius="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
     app:cardElevation="4dp">
 
     <LinearLayout
@@ -14,18 +14,21 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+
         <ImageView
             android:id="@+id/iv_product"
             android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+            android:layout_height="200dp" />
+
 
         <TextView
             android:id="@+id/tv_title"
-            tools:text="Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            tools:text="Title" />
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -34,26 +37,26 @@
                 android:id="@+id/tv_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="tv_category"
                 android:layout_gravity="start|center"
-                android:textSize="14dp"/>
+                android:textSize="14dp"
+                tools:text="tv_category" />
 
             <TextView
                 android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="price $"
                 android:layout_gravity="end|center"
                 android:textColor="#4CAF50"
-                android:textSize="14dp"/>
-
+                android:textSize="14dp"
+                tools:text="price $" />
 
 
         </FrameLayout>
 
 
-    </LinearLayout>
 
+
+    </LinearLayout>
 
 
 </com.google.android.material.card.MaterialCardView>

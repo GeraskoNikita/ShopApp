@@ -1,4 +1,4 @@
-package com.example.shopapp.ui.product_ditails
+package com.example.shopapp.ui.fragment.product_details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -15,12 +15,14 @@ import androidx.navigation.fragment.navArgs
 import coil3.load
 import com.example.shopapp.R
 import com.example.shopapp.data.model.ProductDto
-import com.example.shopapp.data.repository.ProductRepository
 import com.example.shopapp.databinding.FragmentProductDetailsBinding
+import com.example.shopapp.domain.models.Product
 import com.example.shopapp.ui.models.UIState
-import com.example.shopapp.ui.product_ditails.viewmodel.ProductDetailsViewModel
-import com.example.shopapp.ui.product_ditails.factory.ProductDetailsViewModelFactory
+import com.example.shopapp.ui.fragment.product_details.viewmodel.ProductDetailsViewModel
+
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
 
@@ -30,11 +32,8 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
     private val args: ProductDetailsFragmentArgs by navArgs()
 
     // Создаём ViewModel с productId через фабрику
-    private val viewModel: ProductDetailsViewModel by viewModels {
-        ProductDetailsViewModelFactory(
-            productId = args.productId
-
-        )
+    private val viewModel: ProductDetailsViewModel by viewModel {
+        parametersOf(args.productId)
     }
 
     override fun onCreateView(
@@ -79,13 +78,13 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
         }
     }
 
-    private fun loadData(data: ProductDto) {
+    private fun loadData(data: Product) {
         with(binding) {
             productName.text = data.title
             productPrice.text = "${data.price} $"
             productDescription.text = data.description
             productImage.load(data.image)
-            productRating.text = "${data.ratingDto.rate} (${data.ratingDto.count})"
+            productRating.text = "${data.rating.rate} (${data.rating.count})"
 
             btnCancel.setOnClickListener { view ->
                 parentFragmentManager.popBackStack()
