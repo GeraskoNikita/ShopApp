@@ -9,12 +9,15 @@ import coil3.load
 import coil3.request.crossfade
 import com.example.shopapp.databinding.ItemProductBinding
 import com.example.shopapp.domain.models.Product
+import com.example.shopapp.ui.models.UIState
 
-class ProductListAdapter(private val onClick: (Product) -> Unit) :
+class ProductListAdapter(
+    private val onProductClick: (Product) -> Unit,
+    private val onAddCartClick: (Product) -> Unit
+) :
     ListAdapter<Product, ProductListAdapter.ProductListHolder>(
         ProductDiffUtilCallback()
     ) {
-
 
 
     override fun onCreateViewHolder(
@@ -67,8 +70,12 @@ class ProductListAdapter(private val onClick: (Product) -> Unit) :
                     crossfade(true)
                 }
 
-                root.setOnClickListener {
-                    onClick(product)
+                ivProduct.setOnClickListener {
+                    onProductClick(product)
+
+                }
+                btnCart.setOnClickListener {
+                    onAddCartClick(product)
                 }
 
             }

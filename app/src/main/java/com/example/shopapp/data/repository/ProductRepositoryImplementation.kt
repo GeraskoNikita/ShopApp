@@ -1,7 +1,7 @@
 package com.example.month4.data.repository
 
 import com.example.month4.data.mappers.toDomain
-import com.example.shopapp.data.api.StoreAPI
+import com.example.shopapp.data.datasource.StoreAPI
 import com.example.shopapp.domain.models.Product
 import com.example.shopapp.domain.repository.ProductRepository
 

@@ -31,7 +31,7 @@ class ProductListFragment : Fragment() {
     private var _binding: FragmentProductListBinding? = null
     private val binding get() = _binding!!
 
-    private var adapter = ProductListAdapter {}
+    private var adapter: ProductListAdapter = ProductListAdapter({}, {})
     private val viewModel: ProductListViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,10 +47,25 @@ class ProductListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ProductListAdapter { product ->
-            onClick(product)
+        adapter = ProductListAdapter(
+            onProductClick = { product ->
+                onProductClick(product.id)
+            },
+            onAddCartClick = { product ->
+                onAddCartClick(product)
+            }
+        )
+        with(binding){
+            recyclerView.adapter = adapter
+            btnOpenCart.setOnClickListener { view ->
+                findNavController()
+                    .navigate(ProductListFragmentDirections.Companion.actionProductListFragmentToProductCartFragment())
+            }
         }
-        binding.recyclerView.adapter = adapter
+
+
+
+
         observeState()
 
     }
@@ -92,7 +107,7 @@ class ProductListFragment : Fragment() {
         }
     }
 
-    private fun onClick(product: Product) {
+    private fun onProductClick(productId: Int) {
         binding.progressBar.isVisible = true
         binding.recyclerView.isVisible = false
         viewLifecycleOwner.lifecycleScope.launch {
@@ -100,7 +115,7 @@ class ProductListFragment : Fragment() {
 
                 val action =
                     ProductListFragmentDirections.Companion
-                        .actionProductListFragmentToProductDitailsFragment(product.id)
+                        .actionProductListFragmentToProductDetailsFragment(productId)
 
                 findNavController().navigate(action)
             } catch (e: Exception) {
@@ -112,6 +127,12 @@ class ProductListFragment : Fragment() {
         }
 
     }
+
+    private fun onAddCartClick(product: Product) {
+        viewModel.addToCart(product)
+        Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
+    }
+
 
 
     override fun onDestroyView() {

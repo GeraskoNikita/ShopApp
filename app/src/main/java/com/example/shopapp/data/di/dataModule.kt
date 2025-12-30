@@ -1,16 +1,16 @@
 package com.example.shopapp.data.di
 
 import com.example.month4.data.repository.ProductRepositoryImplementation
-import com.example.shopapp.data.api.StoreAPI
+import com.example.shopapp.data.datasource.StoreAPI
+import com.example.shopapp.data.repository.ProductCartRepositoryImplementation
+import com.example.shopapp.domain.repository.ProductCartRepository
 import com.example.shopapp.domain.repository.ProductRepository
-import com.example.shopapp.ui.fragment.product_details.viewmodel.ProductDetailsViewModel
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
-import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -52,6 +52,8 @@ val dataModule = module {
     single<ProductRepository> {
         ProductRepositoryImplementation(api = get())
     }
+
+    single<ProductCartRepository> { ProductCartRepositoryImplementation(get()) }
 
 
 

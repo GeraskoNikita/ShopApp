@@ -1,5 +1,7 @@
-package com.example.shopapp.data.api
+package com.example.shopapp.data.datasource
 
+import com.example.shopapp.data.model.CartRequestDto
+import com.example.shopapp.data.model.CartResponseDto
 import com.example.shopapp.data.model.ProductDto
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -13,5 +15,6 @@ interface StoreAPI {
     @GET("products/{id}")
     suspend fun getProductById(@Path("id") id: Int): ProductDto
 
-
+    @POST("carts")
+    suspend fun checkout(@Body cart: CartRequestDto): CartResponseDto
 }

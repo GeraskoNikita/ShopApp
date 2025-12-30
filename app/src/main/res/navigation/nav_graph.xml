@@ -10,11 +10,14 @@
         android:label="fragment_product_list"
         tools:layout="@layout/fragment_product_list">
         <action
-            android:id="@+id/action_productListFragment_to_productDitailsFragment"
-            app:destination="@id/productDitailsFragment" />
+            android:id="@+id/action_productListFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+        <action
+            android:id="@+id/action_productListFragment_to_productCartFragment"
+            app:destination="@id/productCartFragment" />
     </fragment>
     <fragment
-        android:id="@+id/productDitailsFragment"
+        android:id="@+id/productDetailsFragment"
         android:name="com.example.shopapp.ui.fragment.product_details.ProductDetailsFragment"
         android:label="fragment_product_ditails"
         tools:layout="@layout/fragment_product_details">
@@ -23,6 +26,11 @@
             android:name="productId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/productCartFragment"
+        android:name="com.example.shopapp.ui.fragment.product_cart.ProductCartFragment"
+        android:label="ProductCartFragment"
+        tools:layout="@layout/fragment_product_cart"/>
 
 
 </navigation>
